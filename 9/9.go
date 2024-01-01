@@ -1,5 +1,7 @@
 package main
 
+// Task : conveyor of numbers, first writes to channel from array, second is for writing ar[..] * 2
+
 import "fmt"
 
 func main() {
