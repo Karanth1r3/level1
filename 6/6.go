@@ -40,7 +40,7 @@ func launchSecond() {
 	stop = true
 	wg.Wait()
 	fmt.Println("Second launch ended")
-}/
+}
 
 func launchThird() {
 	ctx, cancel := context.WithCancel(context.Background()) // todo - read about different contexts types
@@ -80,7 +80,7 @@ func secondWay(stop *bool, wg *sync.WaitGroup) {
 	}
 }
 
-// third way - using context
+// third way - using context or interruption signal with channel
 func thirdWay(ctx context.Context) {
 	for { // infinite loop
 		select {

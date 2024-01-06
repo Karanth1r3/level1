@@ -35,20 +35,20 @@ func main() {
 		// Close message channel.
 		close(msgCh)
 	}()
-/
-	// Register interrupt signal channel.
+
+	// Register interruption signal channel.
 	signalCh := make(chan os.Signal, 1)
-	signal.Notify(signalCh, os.Interrupt)
+	signal.Notify(signalCh, os.Interrupt) // subscription to interrupt event, Ctrl + C in console for example
 
 	// Start infinite loop of sending messages.
 	for msgNum := 0; ; msgNum++ {
 
 		select {
 
-		// Quit program on receive interrupt signal.
+		// Quit program on interrupt signal received.
 		// All gourotines will be closed in defer func.
 		case <-signalCh:
-			fmt.Printf("\nReceive interrupt signal\n")
+			fmt.Printf("\nReceive interruption signal\n")
 			return
 
 		// Default action - send message to message channel
@@ -94,14 +94,15 @@ func asyncRead(wg *sync.WaitGroup, readerIndex int, msgCh <-chan string, doneCh 
 
 	fmt.Printf("Reader %d start listen channels\n", readerIndex)
 
-	for {
+	for { // endless loop
 		select {
 		case msg := <-msgCh:
-			fmt.Printf("Reader %d receive message %s\n", readerIndex, msg)
+			fmt.Printf("Reader %d receives message %s\n", readerIndex, msg) // if message from msgChan was sent, print it
 		case <-doneCh:
-			fmt.Printf("Reader %d is shutdown\n", readerIndex)
+			fmt.Printf("Reader %d is shutdown\n", readerIndex) // other possible case - waiting for something from doneChannel, then return and decrease wg counter
 			wg.Done()
 			return
 		}
+		// don't have default, so it's blocking
 	}
 }

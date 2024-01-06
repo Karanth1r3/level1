@@ -17,16 +17,16 @@ func groupTemps(tmps []float64) map[float64][]float64 {
 
 	slices.Sort(tmps) // for getting min & max at polars of the slice
 
-	min := roundTemp(tmps[0], false)          // getting minimum group key
-	max := roundTemp(tmps[len(tmps)-1], true) // max group key
-	//fmt.Println(min, max)
+	min := roundTemp(tmps[0], false, 10)          // getting minimum group key
+	max := roundTemp(tmps[len(tmps)-1], true, 10) // max group key
+	fmt.Println(min, max)
 
 	mn := (min)
 	mx := (max)
 
 	c := getRange(mn, mx) // can be changed to allow any step in argument actually (but not today) currently works for 10 only
 	//fmt.Println(c)
-	?
+
 	for _, elem := range tmps {
 		//	slc := make([]float64, 0)
 		for _, scale := range c {
@@ -58,25 +58,15 @@ func getRange(min, max float64) []float64 {
 	return result
 }
 
-// get min or max value rounded to 10, ceil or floor (for min or max of the range) depends on bool argument
-func roundTemp(val float64, isMax bool) float64 {
-	dgts := 0 // number of digits in number to recreate it later
+// get min or max value rounded to step, ceil or floor (for min or max of the range) depends on bool argument
+func roundTemp(val float64, isMax bool, step int) float64 {
+	var temp int = int(math.Abs(val / float64(step)))
+	fmt.Println(temp)
 	if val > 0 {
-		for val > 10 {
-			val /= 10
-			dgts++
-		}
+		val = float64(step*temp + step)
 	} else {
-		for val < -10 {
-			val /= 10
-			dgts++
-		}
+		val = float64(-step*temp - step)
 	}
-	if isMax { // if need to find max range value - floor it, otherwise - ceil
-		val = math.Floor(val)
-	} else {
-		val = math.Ceil(val)
-	}
-	mul := math.Pow(10, float64(dgts)) //
-	return val * mul
+
+	return val
 }

@@ -17,8 +17,8 @@ func main() {
 		wg     sync.WaitGroup
 	)
 
-	wg.Add(2) // in these conditions the number of goroutines is known already
-	go Write(&wg, msgCh, doneCh)
+	wg.Add(2)                    // in these conditions the number of goroutines is known already
+	go Write(&wg, msgCh, doneCh) // reminds conveyour, one by one from wr to rd
 	go Read(&wg, msgCh, doneCh)
 
 	time.Sleep(delay)
@@ -43,7 +43,7 @@ func Write(wg *sync.WaitGroup, msgChan chan string, doneCh chan struct{}) {
 
 // Read
 func Read(wg *sync.WaitGroup, msgChan chan string, doneCh chan struct{}) {
-	for seqNum := 0; ; seqNum++ {
+	for {
 		select {
 		case <-doneCh: // the same as with Write()
 			wg.Done()
