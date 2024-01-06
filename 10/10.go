@@ -19,7 +19,7 @@ func groupTemps(tmps []float64) map[float64][]float64 {
 
 	min := roundTemp(tmps[0], 10)           // getting minimum group key
 	max := roundTemp(tmps[len(tmps)-1], 10) // max group key
-	fmt.Println(min, max)
+	//	fmt.Println(min, max)
 
 	mn := (min)
 	mx := (max)
@@ -61,7 +61,7 @@ func getRange(min, max float64, step int) []float64 {
 // get min or max value rounded to step, ceil or floor (for min or max of the range) depends on bool argument
 func roundTemp(val float64, step int) float64 {
 	var temp int = int(math.Abs(val / float64(step)))
-	fmt.Println(temp)
+	//	fmt.Println(temp)
 	if val > 0 {
 		val = float64(step*temp + step)
 	} else {
