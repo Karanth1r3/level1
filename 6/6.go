@@ -40,7 +40,7 @@ func launchSecond() {
 	stop = true
 	wg.Wait()
 	fmt.Println("Second launch ended")
-}
+}/
 
 func launchThird() {
 	ctx, cancel := context.WithCancel(context.Background()) // todo - read about different contexts types

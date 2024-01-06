@@ -17,7 +17,7 @@ func main() {
 		wg     sync.WaitGroup
 	)
 
-	wg.Add(2)
+	wg.Add(2) // in these conditions the number of goroutines is known already
 	go Write(&wg, msgCh, doneCh)
 	go Read(&wg, msgCh, doneCh)
 
@@ -30,13 +30,13 @@ func main() {
 
 // Write
 func Write(wg *sync.WaitGroup, msgChan chan string, doneCh chan struct{}) {
-	for seqNum := 0; ; seqNum++ {
+	for seqNum := 0; ; seqNum++ { //endless loop
 		select {
-		case <-doneCh:
+		case <-doneCh: // if receiving an data from done channel, end goroutine & decrease wg counter
 			wg.Done()
 			return
 		default:
-			msgChan <- strconv.Itoa(seqNum)
+			msgChan <- strconv.Itoa(seqNum) // otherwise allways will be sending data to msgChan
 		}
 	}
 }
@@ -45,10 +45,10 @@ func Write(wg *sync.WaitGroup, msgChan chan string, doneCh chan struct{}) {
 func Read(wg *sync.WaitGroup, msgChan chan string, doneCh chan struct{}) {
 	for seqNum := 0; ; seqNum++ {
 		select {
-		case <-doneCh:
+		case <-doneCh: // the same as with Write()
 			wg.Done()
 			return
-		case msg := <-msgChan:
+		case msg := <-msgChan: // otherwise will be always waiting for input from msgChan
 			fmt.Println("Message", msg, "processed")
 		}
 	}

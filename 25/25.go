@@ -16,10 +16,10 @@ func main() {
 func sleep1(dur time.Duration) {
 
 	ticker := time.NewTicker(dur)
-	<-ticker.C
+	<-ticker.C // blocks until data is sent from ticker
 	ticker.Stop()
 }
 
 func sleep2(sec int) {
-	<-time.After(time.Second * time.Duration(sec))
+	<-time.After(time.Second * time.Duration(sec)) // blocks until receiving something
 }

@@ -4,7 +4,7 @@ import "fmt"
 
 type (
 	printer struct{}
-	adapter struct{ printer }
+	adapter struct{ printer } // adapter includes incompatible type
 	output  interface {
 		print(int)
 	}
@@ -17,7 +17,7 @@ func writeOutput(out output) {
 
 // translate int to string (initial format to compatible)
 func (a *adapter) print(val int) {
-	a.printer.print(fmt.Sprint(val))
+	a.printer.print(fmt.Sprint(val)) // adapter method wraps method from incompatible type, changing logic if necessary
 }
 
 func (p *printer) print(s string) {

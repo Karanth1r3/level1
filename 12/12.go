@@ -12,9 +12,9 @@ func main() {
 func GetUnique(set []string) []string {
 	uniqMap := map[string]struct{}{}
 	for _, v := range set {
-		uniqMap[v] = struct{}{}
+		uniqMap[v] = struct{}{} // only one unique key is allowed in map => copies will not pass
 	}
-	result := make([]string, 0, len(uniqMap))
+	result := make([]string, 0, len(uniqMap)) // assingn keys to slice
 	for k := range uniqMap {
 		result = append(result, k)
 	}

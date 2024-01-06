@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"math/big"
+	"math/big" // golang has lib for this
 )
 
 func main() {

@@ -19,7 +19,7 @@ func part() {
 	s := createHugeString(1 << 10)
 	// s will be gc'ed after a smaller copy (of size [:x] instead of full) will be assigned to substr
 	substr = strings.Clone(s[:100])
-	//substr = s[:100]   // whole s will be allocated in memory this way
+	//substr = s[:100]   // whole s will be allocated in memory this way (substr will contain link to substring)
 }
 
 func main() {

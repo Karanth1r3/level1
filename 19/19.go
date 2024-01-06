@@ -18,14 +18,14 @@ func getRuneSlice(s string) []rune {
 	return rs
 }
 
-func Reverse(s string) string {
+func Reverse(s string) string { // this one is from golang lib
 	reversed := make([]byte, len(s))
 	i := 0
 
 	for len(s) > 0 {
-		r, size := utf8.DecodeLastRuneInString(s)
-		s = s[:len(s)-size]
-		i += utf8.EncodeRune(reversed[i:], r)
+		r, size := utf8.DecodeLastRuneInString(s) // get rune
+		s = s[:len(s)-size]                       // subtract last symbol from string
+		i += utf8.EncodeRune(reversed[i:], r)     // adds symbol converted to byte (string is []byte under the hood)
 	}
 
 	return string(reversed)

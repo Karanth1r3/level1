@@ -14,13 +14,13 @@ func main() {
 
 // Sets the bit at pos in the integer n.
 func setBit(n *int64, pos uint) int64 {
-	*n |= (1 << pos) // OR statement
+	*n |= (1 << pos) // original bit + all 0 except the bit on targeted position (x | 1 = 1)
 	return *n
 }
 
 // Clears the bit at pos in n.
 func clearBit(n *int64, pos uint) int64 {
-	mask := int64(^(1 << pos))
-	*n &= mask
+	mask := int64(^(1 << pos)) // create mask with 1 on unchanged bits, 0 on targeted bit
+	*n &= mask                 // multiply original number by mask, targeted bit shall change it's value to x & 0, other ones won't change, cuz x & 1 = x
 	return *n
 }

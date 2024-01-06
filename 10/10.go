@@ -24,8 +24,9 @@ func groupTemps(tmps []float64) map[float64][]float64 {
 	mn := (min)
 	mx := (max)
 
-	c := getRange(mn, mx)
+	c := getRange(mn, mx) // can be changed to allow any step in argument actually (but not today) currently works for 10 only
 	//fmt.Println(c)
+	?
 	for _, elem := range tmps {
 		//	slc := make([]float64, 0)
 		for _, scale := range c {

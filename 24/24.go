@@ -22,6 +22,7 @@ func Distance(p1, p2 Point) float64 {
 	return math.Sqrt(dx*dx + dy*dy)
 }
 
+// not much to comment i guess
 func main() {
 
 	p1 := NewPoint(5, 5)

@@ -14,7 +14,7 @@ func main() {
 }
 
 // returns elements that are present in both inputs
-func getIntersection[T comparable](m1, m2 []T) []T { // for == in loop T needs to be comparable
+func getIntersection[T comparable](m1, m2 []T) []T { // for == operator to be legit in loop => T needs to be comparable
 	result := []T{}
 	for _, elem := range m1 {
 		for _, elem2 := range m2 {

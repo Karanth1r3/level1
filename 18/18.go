@@ -17,11 +17,11 @@ func main() {
 	wg := &sync.WaitGroup{}
 	mu := &sync.Mutex{}
 	counter := counter{0}
-	defer fmt.Println(counter.count, "defer")
+	//defer fmt.Println(counter.count, "defer") not sure how this one behaves...
 	for i := 0; i < 50; i++ {
 		wg.Add(1)
 		go func() {
-			mu.Lock()
+			mu.Lock() // sync is required to prevent race
 			counter.inc()
 			fmt.Println(counter)
 			mu.Unlock()

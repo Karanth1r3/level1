@@ -16,7 +16,7 @@ func main() {
 		wg.Add(1)
 		go func(v int) {
 			defer wg.Done()
-			mu.Lock() // to prevent race which is critical with maps case
+			mu.Lock() // maps don't support concurrent write (will panic without lock)
 			writeToMap[int, string](mp, v, strconv.Itoa(v))
 			writeToMap[string, int](mp2, strconv.Itoa(v), v)
 			mu.Unlock()
@@ -26,7 +26,7 @@ func main() {
 	fmt.Println(mp)
 }
 
-// map storages pointer so the signature is fine
+// generics for large range of types, no need to write separate function for each case
 func writeToMap[T1 comparable, T2 any](m map[T1]T2, k T1, v T2) {
 	m[k] = v
 }

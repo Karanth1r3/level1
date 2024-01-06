@@ -38,3 +38,5 @@ func typeofSC(v interface{}) string {
 		return "unknown"
 	}
 }
+
+// also seen option with reflect but the task is about interface typeof

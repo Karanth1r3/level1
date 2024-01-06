@@ -35,7 +35,7 @@ func main() {
 		// Close message channel.
 		close(msgCh)
 	}()
-
+/
 	// Register interrupt signal channel.
 	signalCh := make(chan os.Signal, 1)
 	signal.Notify(signalCh, os.Interrupt)

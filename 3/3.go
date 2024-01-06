@@ -29,7 +29,7 @@ func lesson3() int {
 	for _, elem := range array {
 		wg.Add(1)
 		go func(x int) {
-			sumMu.Lock()
+			sumMu.Lock() // without lock order of calculations & output is not guaranteed
 			sum += x * x
 			sumMu.Unlock()
 			wg.Done()

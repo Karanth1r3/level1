@@ -10,6 +10,7 @@ func main() {
 		arr = [10]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 	)
 
+	//channels are not buffered, so when the first one receives value, it's sent to the second one after that; same for every number in array, one by one
 	c := readArr(arr)  // creating first channel, first element of pipeline (readArr returns readonly channel)
 	out := fillSqrs(c) // second channel, second element, fillsqrs returns rdonly chnl
 

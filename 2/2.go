@@ -22,5 +22,5 @@ func main() {
 		}(elem)
 	}
 	// wait for whole group to finish
-	wg.Wait()
+	wg.Wait() // when counter is set back to 0, main goroutine main proceed & end
 }

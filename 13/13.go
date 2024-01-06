@@ -13,6 +13,6 @@ func main() {
 
 // swap function should operate with pointers
 // otherwise only copies will swap but original vars will not
-func swap[T any](x, y *T) {
+func swap[T any](x, y *T) { // perhaps "any" is not the best one for this case, not sure yet
 	*x, *y = *y, *x
 }
