@@ -17,8 +17,8 @@ func groupTemps(tmps []float64) map[float64][]float64 {
 
 	slices.Sort(tmps) // for getting min & max at polars of the slice
 
-	min := roundTemp(tmps[0], false, 10)          // getting minimum group key
-	max := roundTemp(tmps[len(tmps)-1], true, 10) // max group key
+	min := roundTemp(tmps[0], 10)           // getting minimum group key
+	max := roundTemp(tmps[len(tmps)-1], 10) // max group key
 	fmt.Println(min, max)
 
 	mn := (min)
@@ -59,7 +59,7 @@ func getRange(min, max float64) []float64 {
 }
 
 // get min or max value rounded to step, ceil or floor (for min or max of the range) depends on bool argument
-func roundTemp(val float64, isMax bool, step int) float64 {
+func roundTemp(val float64, step int) float64 {
 	var temp int = int(math.Abs(val / float64(step)))
 	fmt.Println(temp)
 	if val > 0 {
