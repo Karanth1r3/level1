@@ -44,7 +44,7 @@ func groupTemps(tmps []float64) map[float64][]float64 {
 	return m
 }
 
-// generate range for given data (elements in range will be different by 10)
+// generate range for given data (elements in range will be different by step)
 func getRange(min, max float64, step int) []float64 {
 	i := 0
 	result := make([]float64, 1)
@@ -58,7 +58,7 @@ func getRange(min, max float64, step int) []float64 {
 	return result
 }
 
-// get min or max value rounded to step, ceil or floor (for min or max of the range) depends on bool argument
+// get min or max value rounded to step
 func roundTemp(val float64, step int) float64 {
 	var temp int = int(math.Abs(val / float64(step)))
 	//	fmt.Println(temp)
