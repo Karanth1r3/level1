@@ -24,7 +24,7 @@ func groupTemps(tmps []float64) map[float64][]float64 {
 	mn := (min)
 	mx := (max)
 
-	c := getRange(mn, mx) // can be changed to allow any step in argument actually (but not today) currently works for 10 only
+	c := getRange(mn, mx, 10) // can be changed to allow any step in argument actually (but not today) currently works for 10 only
 	//fmt.Println(c)
 
 	for _, elem := range tmps {
@@ -45,13 +45,13 @@ func groupTemps(tmps []float64) map[float64][]float64 {
 }
 
 // generate range for given data (elements in range will be different by 10)
-func getRange(min, max float64) []float64 {
+func getRange(min, max float64, step int) []float64 {
 	i := 0
 	result := make([]float64, 1)
 
 	for min < max {
 		result = append(result, min)
-		min += 10
+		min += float64(step)
 		i++
 	}
 	result = append(result, max)
