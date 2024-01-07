@@ -45,7 +45,10 @@ func groupTemps(tmps []float64) map[float64][]float64 {
 }
 
 // generate range for given data (elements in range will be different by step)
-func getRange(min, max float64, step int) []float64 {
+func getRange(min, max float64, step uint) []float64 {
+	if step == 0 {
+		fmt.Println("step should not be > 0")
+	}
 	i := 0
 	result := make([]float64, 1)
 
@@ -59,8 +62,11 @@ func getRange(min, max float64, step int) []float64 {
 }
 
 // get min or max value rounded to step
-func roundTemp(val float64, step int) float64 {
-	var temp int = int(math.Abs(val / float64(step)))
+func roundTemp(val float64, step uint) float64 {
+	if step == 0 {
+		fmt.Println("step should not be > 0")
+	}
+	var temp uint = uint(math.Abs(val / float64(step)))
 	//	fmt.Println(temp)
 	if val > 0 {
 		val = float64(step*temp + step)
